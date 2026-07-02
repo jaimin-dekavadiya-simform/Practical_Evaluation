@@ -5,6 +5,8 @@ hiding in it. You have **60 minutes** to find and fix as many as you can.
 
 ## Setup
 
+Requires **Node.js 18+** and **Docker** (for Postgres).
+
 ```bash
 docker-compose up -d          # starts Postgres on localhost:5432
 cp .env.example .env
