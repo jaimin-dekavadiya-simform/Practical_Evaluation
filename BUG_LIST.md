@@ -10,7 +10,7 @@ We should make a DB call to check if the user with the same email already exists
 
 ## Bug 2 : user.contoller.ts - Line 9
 
-We are not validating user input with DTO class, so any invalid input is directly pushed to the DATA base.
+We are not validating user input with DTO class, so any invalid input is directly pushed to the DATA base. ( this issue is applicable to all other controllers as we are not using any validators.)
 
 ### Solution :
 
@@ -33,7 +33,7 @@ We are reading the file Synchronously. Which will block the main thread.
 We should use the async operation for file read.
 Better approach for large file would be create a readStream and pipe it with node res stream.
 
-# 1 : Order Service :
+# 2 : Order Service :
 
 ## Bug 1 : order.service.ts - line 23
 
@@ -58,3 +58,29 @@ We are doing the N+1 query here. for each order we are executing a new query to 
 ### Solution :
 
 We should execute one query that will join the Table and get us all the data needed for that service. We can use "include" keyword in the prisma also.
+
+## Bug 4 : order.service.ts - line 83
+
+We are using for loop fr bulk importing the Orders.
+
+### Solution :
+
+We should use one query with Isert Many to bulk import. to avoid multiple query IO.
+
+# 2 : Report Service :
+
+## Bug 1 : report.service.ts - line 56
+
+We are awaiting the notifyReport function. this will introduce unnecessary delay in the response.
+
+### Solution :
+
+We should not await any type of notification service in the Create Services. We can use queue to handle these functions so we can retry or if not that important then we can just let them run in background and return the response.
+
+## Bug 2 : report.service.ts - line 47
+
+Unnecessary nested loops. Just consuming CPU cycles which does nothing. and it will cause Timeout.
+
+### Solution :
+
+Remove the Unnecessary code ( loops ).
