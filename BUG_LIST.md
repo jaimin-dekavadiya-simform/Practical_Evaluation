@@ -92,3 +92,13 @@ We are using `$queryRawUnsafe` everywhere. This can lead to SQL injection and a 
 ### Solution
 
 We should use `$queyRaw` which prevents SQL injections and improves security.
+
+# Other Issues;
+
+## 1
+
+While Project initialization I forgot to do prisma migration after changing the DB url. which resulted in 10-15 minutes of mine wasted.
+
+## 2
+
+Took some time to write bodies of req and setup the Postman, I tried to integrate the Swagger but the package was not installing due to some package version errors.
