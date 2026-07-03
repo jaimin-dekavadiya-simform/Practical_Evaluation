@@ -84,3 +84,11 @@ Unnecessary nested loops. Just consuming CPU cycles which does nothing. and it w
 ### Solution :
 
 Remove the Unnecessary code ( loops ).
+
+## Bug 3 : Generalized
+
+We are using `$queryRawUnsafe` everywhere. This can lead to SQL injection and a security risk.
+
+### Solution
+
+We should use `$queyRaw` which prevents SQL injections and improves security.
